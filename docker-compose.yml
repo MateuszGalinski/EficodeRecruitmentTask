@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - 9000:9000
+  frontend:
+    build: ./frontend
+    environment:
+      - ENDPOINT=http://localhost:9000/api
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 3000:8000
+    depends_on:
+      - backend
+  
